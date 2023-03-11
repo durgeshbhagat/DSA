@@ -126,7 +126,7 @@ int get_top(mySTACK *s)
 
 bool check_stack_overflow(mySTACK *s)
 {
-    return (s->max_size == s->top);
+    return (s->max_size -1 == s->top);
 }
 
 bool check_stack_underflow(mySTACK *s)
