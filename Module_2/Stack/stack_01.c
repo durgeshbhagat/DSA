@@ -8,8 +8,6 @@
 
 #define INT_MIN -9999
 
-
-
 // defining a new user-defined
 // data type STACK -> mySTACK
 typedef struct STACK
@@ -20,7 +18,7 @@ typedef struct STACK
 }mySTACK;
 
 
-// operation supported on STACK
+// Operations supported on STACK
 mySTACK* init_stack(int max_size);
 void push(mySTACK *s, int x);
 void show_stack(mySTACK *s);
@@ -40,13 +38,42 @@ int main()
     // Initiliazing the stack by calling init_stack
     s1 = init_stack(10);
     
-    push(s1, 4);
-    push(s1, 1);
-    push(s1, 19);
-    show_stack(s1);
-    x = pop(s1);
-    printf("\nDeleted element is: %d\n", x);
-    show_stack(s1);
+    int userin;
+    while(userin!=4){
+        printf("\n---- STACK ----");
+        printf("\n(1) Diplay\n(2) Push\n(3) Pop\n(4) Quit\n");
+        printf("Enter choice: ");
+        scanf("%d", &userin);
+        switch(userin){
+            case 1:
+                show_stack(s1);
+                break;
+            case 2:
+                printf("\nEnter element to push to stack: ");
+                int item; 
+                scanf("%d", &item);
+                push(s1, item);
+                printf("\n%d is added to stack.\n", item);
+                break;
+            case 3:
+                item = pop(s1);
+                printf("\n%d is deleted from the stack.\n", item);
+                break;
+            case 4:
+                printf("\nQuitting...\n");
+                break;
+            default:
+                printf("\nInvalid choice.\n");
+        }
+    }
+
+    // push(s1, 4);
+    // push(s1, 1);
+    // push(s1, 19);
+    // show_stack(s1);
+    // x = pop(s1);
+    // printf("\nDeleted element is: %d\n", x);
+    // show_stack(s1);
 
     return 0;
 }
@@ -79,7 +106,7 @@ mySTACK* init_stack(int max_size)
 void push(mySTACK *s, int x)
 {
     if(check_stack_overflow(s))
-        printf("\t STACK overflow \n");
+        printf("\nSTACK overflow \n");
     else
     {
         s->top +=1;
@@ -90,7 +117,7 @@ void push(mySTACK *s, int x)
 void show_stack(mySTACK *s)
 {
     int i;
-    printf("\t STACK elements are: ");
+    printf("\nSTACK elements are: \n");
     for(i=0; i<=s->top; i++)
         printf("%d ", s->array[i]);
     printf("\n");
@@ -101,7 +128,7 @@ int pop(mySTACK *s)
     int x;
     if(check_stack_underflow(s))
     {
-        printf("\n STACK Underflow \n");
+        printf("\nSTACK Underflow \n");
         return INT_MIN;
     }
     else
@@ -117,7 +144,7 @@ int get_top(mySTACK *s)
     int x;
     if(check_stack_underflow(s))
     {
-        printf("\n STACK Underflow \n");
+        printf("\nSTACK Underflow \n");
         return INT_MIN;
 
     }
