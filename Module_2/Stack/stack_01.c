@@ -35,8 +35,12 @@ int main()
     mySTACK *s2;
     int x;
 
+    printf("Enter size of stack: ");
+    int size;
+    scanf("%d", &size);
+
     // Initiliazing the stack by calling init_stack
-    s1 = init_stack(10);
+    s1 = init_stack(size);
     
     int userin;
     while(userin!=4){
@@ -53,11 +57,9 @@ int main()
                 int item; 
                 scanf("%d", &item);
                 push(s1, item);
-                printf("\n%d is added to stack.\n", item);
                 break;
             case 3:
                 item = pop(s1);
-                printf("\n%d is deleted from the stack.\n", item);
                 break;
             case 4:
                 printf("\nQuitting...\n");
@@ -111,6 +113,7 @@ void push(mySTACK *s, int x)
     {
         s->top +=1;
         s->array[s->top] = x;
+        printf("\n%d is added to stack.\n", x);
     }
 }
 
@@ -135,6 +138,7 @@ int pop(mySTACK *s)
     {
         x = s->array[s->top];
         s->top -=1;
+        printf("\n%d is deleted from the stack.\n", x);
         return x;
     }
 }
