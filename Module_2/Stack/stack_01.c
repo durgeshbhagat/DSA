@@ -1,12 +1,12 @@
 #include<stdio.h>
-#include<malloc.h>
+
+// Using stdlib header file for malloc and free functions.
+#include<stdlib.h>
 
 // header for boolean data types true/false
 #include <stdbool.h>
 
 #define INT_MIN -9999
-
-
 
 // defining a new user-defined
 // data type STACK -> mySTACK
@@ -18,7 +18,7 @@ typedef struct STACK
 }mySTACK;
 
 
-// operation supported on STACK
+// Operations supported on STACK
 mySTACK* init_stack(int max_size);
 void push(mySTACK *s, int x);
 void show_stack(mySTACK *s);
@@ -34,18 +34,48 @@ int main()
     mySTACK *s1; 
     mySTACK *s2;
     int x;
-    // Calling init_stack
-    s1 = init_stack(10);
-    //printf("\n Line 28 s1->top=%d",s1->top);
 
-    // Adding elelments by calling push function
-    push(s1, 4);
-    push(s1, 1);
-    push(s1, 19);
-    show_stack(s1);
-    x = pop(s1);
-    printf("\nDeleted element is: %d\n", x);
-    show_stack(s1);
+    printf("Enter size of stack: ");
+    int size;
+    scanf("%d", &size);
+
+    // Initiliazing the stack by calling init_stack
+    s1 = init_stack(size);
+    
+    int userin;
+    while(userin!=4){
+        printf("\n---- STACK ----");
+        printf("\n(1) Diplay\n(2) Push\n(3) Pop\n(4) Quit\n");
+        printf("Enter choice: ");
+        scanf("%d", &userin);
+        switch(userin){
+            case 1:
+                show_stack(s1);
+                break;
+            case 2:
+                printf("\nEnter element to push to stack: ");
+                int item; 
+                scanf("%d", &item);
+                push(s1, item);
+                break;
+            case 3:
+                item = pop(s1);
+                break;
+            case 4:
+                printf("\nQuitting...\n");
+                break;
+            default:
+                printf("\nInvalid choice.\n");
+        }
+    }
+
+    // push(s1, 4);
+    // push(s1, 1);
+    // push(s1, 19);
+    // show_stack(s1);
+    // x = pop(s1);
+    // printf("\nDeleted element is: %d\n", x);
+    // show_stack(s1);
 
     return 0;
 }
@@ -53,12 +83,15 @@ int main()
 mySTACK* init_stack(int max_size)
 { 
     mySTACK *s;
-    //Allocate memory for stack
-    s = malloc(sizeof(mySTACK));
+    // Allocate memory for stack
+    // Type casting the void* pointer return type of malloc to myStack*
+    s = (mySTACK*) malloc(sizeof(mySTACK));
     if(s==NULL)
         return NULL;
-    // allocate memory for array
-    s->array = malloc(sizeof(int) * max_size);
+
+    // Allocate memory for items array
+    // Type casting the void* pointer return type of malloc to int*
+    s->array = (int*) malloc(sizeof(int) * max_size);
     // free the stack memory if array memory not allocated
     if(s->array ==NULL)
     {
@@ -75,21 +108,26 @@ mySTACK* init_stack(int max_size)
 void push(mySTACK *s, int x)
 {
     if(check_stack_overflow(s))
-        printf("\t STACK overflow \n");
+        printf("\nSTACK overflow \n");
     else
     {
         s->top +=1;
         s->array[s->top] = x;
+        printf("\n%d is added to stack.\n", x);
     }
 }
 
 void show_stack(mySTACK *s)
 {
-    int i;
-    printf("\t STACK elements are: ");
-    for(i=0; i<=s->top; i++)
-        printf("%d ", s->array[i]);
-    printf("\n");
+    if(s->top == -1)
+        printf("\nStack is empty\n");
+    else{
+        int i;
+        printf("\nSTACK elements are: \n");
+        for(i=0; i<=s->top; i++)
+            printf("%d ", s->array[i]);
+        printf("\n");
+    }
 }
 
 int pop(mySTACK *s)
@@ -97,13 +135,14 @@ int pop(mySTACK *s)
     int x;
     if(check_stack_underflow(s))
     {
-        printf("\n STACK Underflow \n");
+        printf("\nSTACK Underflow \n");
         return INT_MIN;
     }
     else
     {
         x = s->array[s->top];
         s->top -=1;
+        printf("\n%d is deleted from the stack.\n", x);
         return x;
     }
 }
@@ -113,7 +152,7 @@ int get_top(mySTACK *s)
     int x;
     if(check_stack_underflow(s))
     {
-        printf("\n STACK Underflow \n");
+        printf("\nSTACK Underflow \n");
         return INT_MIN;
 
     }
