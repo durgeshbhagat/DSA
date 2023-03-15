@@ -119,11 +119,15 @@ void push(mySTACK *s, int x)
 
 void show_stack(mySTACK *s)
 {
-    int i;
-    printf("\nSTACK elements are: \n");
-    for(i=0; i<=s->top; i++)
-        printf("%d ", s->array[i]);
-    printf("\n");
+    if(s->top == -1)
+        printf("\nStack is empty\n");
+    else{
+        int i;
+        printf("\nSTACK elements are: \n");
+        for(i=0; i<=s->top; i++)
+            printf("%d ", s->array[i]);
+        printf("\n");
+    }
 }
 
 int pop(mySTACK *s)
