@@ -1,5 +1,7 @@
 #include<stdio.h>
-#include<malloc.h>
+
+// Using stdlib header file for malloc and free functions.
+#include<stdlib.h>
 
 // header for boolean data types true/false
 #include <stdbool.h>
@@ -54,11 +56,14 @@ mySTACK* init_stack(int max_size)
 { 
     mySTACK *s;
     //Allocate memory for stack
-    s = malloc(sizeof(mySTACK));
+    // Type casting the void* pointer return type of malloc to myStack*
+    s = (mySTACK*) malloc(sizeof(mySTACK));
     if(s==NULL)
         return NULL;
+
     // allocate memory for array
-    s->array = malloc(sizeof(int) * max_size);
+    // Type casting the void* pointer return type of malloc to int*
+    s->array = (int*) malloc(sizeof(int) * max_size);
     // free the stack memory if array memory not allocated
     if(s->array ==NULL)
     {
