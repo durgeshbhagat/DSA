@@ -36,11 +36,10 @@ int main()
     mySTACK *s1; 
     mySTACK *s2;
     int x;
-    // Calling init_stack
-    s1 = init_stack(10);
-    //printf("\n Line 28 s1->top=%d",s1->top);
 
-    // Adding elelments by calling push function
+    // Initiliazing the stack by calling init_stack
+    s1 = init_stack(10);
+    
     push(s1, 4);
     push(s1, 1);
     push(s1, 19);
@@ -55,13 +54,13 @@ int main()
 mySTACK* init_stack(int max_size)
 { 
     mySTACK *s;
-    //Allocate memory for stack
+    // Allocate memory for stack
     // Type casting the void* pointer return type of malloc to myStack*
     s = (mySTACK*) malloc(sizeof(mySTACK));
     if(s==NULL)
         return NULL;
 
-    // allocate memory for array
+    // Allocate memory for items array
     // Type casting the void* pointer return type of malloc to int*
     s->array = (int*) malloc(sizeof(int) * max_size);
     // free the stack memory if array memory not allocated
