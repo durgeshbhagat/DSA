@@ -61,8 +61,7 @@ mySTACK* init_stack(int max_size)
     s->array = malloc(sizeof(int) * max_size);
     // free the stack memory if array memory not allocated
     if(s->array ==NULL)
-    {
-        free(s);
+    {   free(s);
         return NULL;
     }
     // Assigning the max_size and top
